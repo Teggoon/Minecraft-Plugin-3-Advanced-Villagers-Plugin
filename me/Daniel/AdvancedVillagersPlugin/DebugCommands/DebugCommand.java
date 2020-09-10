@@ -1,7 +1,5 @@
 package me.Daniel.AdvancedVillagersPlugin.DebugCommands;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -13,15 +11,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.gmail.fedmanddev.VillagerTrade;
-import com.gmail.fedmanddev.VillagerTradeApi;
 
 import me.Daniel.AdvancedVillagersPlugin.Master;
+import me.Daniel.AdvancedVillagersPlugin.VillagerUpgrade.TradeUpgrade;
+import me.Daniel.AdvancedVillagersPlugin.VillagerUpgrade.GenerateHouse;
 
 /**
  * Class that helps do the basic debug commands
@@ -58,9 +54,12 @@ public class DebugCommand implements CommandExecutor {
 
 		// connect "hello" to this class
 		plugin.getCommand("hello").setExecutor(this);
-		
+
 		// connect "villager" to this class
 		plugin.getCommand("villager").setExecutor(this);
+		
+		// connect "block" to this class
+		plugin.getCommand("house").setExecutor(this);
 		
 	}
 	
@@ -78,7 +77,19 @@ public class DebugCommand implements CommandExecutor {
 				return true;
 			} 
 		}
-		
+
+		// check if command is hello
+		if (label.equalsIgnoreCase("house")) {
+			// check if command came from player, not console
+			if (sender instanceof Player) {
+				//
+				Player p = (Player) sender;
+				Entity ent = (Entity) p;
+				GenerateHouse.buildHouse(ent);
+				
+				return true;
+			} 
+		}
 
 		// check if command is villager
 		if (label.equalsIgnoreCase("villager")) {
@@ -91,22 +102,9 @@ public class DebugCommand implements CommandExecutor {
 				villagerLE.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET));
 				PotionEffect regen = new PotionEffect(PotionEffectType.HEALTH_BOOST, 90000, 2);
 				villager.addPotionEffect(regen);
-				villager.setVillagerType(Villager.Type.JUNGLE);
-				villager.setProfession(Villager.Profession.ARMORER);
-				villager.setVillagerLevel(2);
-				villager.setVillagerExperience(20);
-
-				Merchant merchant = (Merchant) villager;
-				List<MerchantRecipe> trades = new ArrayList<MerchantRecipe>();
-				for (int i = 0; i < MERCHES.length; i++) {
-					MerchantRecipe recipe = new MerchantRecipe(MERCHES[i],999999);
-					recipe.addIngredient(PRICES[i]);
-					trades.add(recipe);
-					
-				}
 				
+				TradeUpgrade.upgradeTrade(villager);
 				
-				merchant.setRecipes(trades);
 				return true;
 			} 
 		}

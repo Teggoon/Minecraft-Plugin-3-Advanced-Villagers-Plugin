@@ -2,7 +2,7 @@ package me.Daniel.AdvancedVillagersPlugin;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import me.Daniel.AdvancedVillagersPlugin.DebugCommands.DebugCommand;
-import me.Daniel.AdvancedVillagersPlugin.VillagerTradeUpgrade.TradeUpgrade;
+import me.Daniel.AdvancedVillagersPlugin.VillagerUpgrade.TradeUpgrade;
 
 
 public class Master extends JavaPlugin {
