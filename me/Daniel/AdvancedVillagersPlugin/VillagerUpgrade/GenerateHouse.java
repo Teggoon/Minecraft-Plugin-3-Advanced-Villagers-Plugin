@@ -15,6 +15,7 @@ public class GenerateHouse {
 			Material.LANTERN,				// 4
 			Material.DARK_OAK_DOOR,			// 5
 			Material.BLUE_BED,				// 6
+			Material.BLAST_FURNACE,			// 7
 			};
 	public static final int[][][] HOUSE = {
 			{
@@ -28,7 +29,7 @@ public class GenerateHouse {
 				{2,1,5,1,2},
 				{1,0,0,0,1},
 				{1,0,0,6,1},
-				{1,0,0,6,1},
+				{1,7,0,6,1},
 				{2,1,1,1,2}
 			},
 			{
@@ -53,11 +54,11 @@ public class GenerateHouse {
 				{2,1,1,1,2}
 			},
 			{
-				{2,1,1,1,2},
+				{1,1,1,1,1},
 				{1,2,1,2,1},
 				{1,1,2,1,1},
 				{1,2,1,2,1},
-				{2,1,1,1,2}
+				{1,1,1,1,1}
 			},
 	}; 
 	public static void buildHouse(Entity e) {
